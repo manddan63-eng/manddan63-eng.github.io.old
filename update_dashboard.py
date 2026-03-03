@@ -30,7 +30,7 @@ while True:
 
 
   if not SPREADSHEET_ID or not SERVICE_ACCOUNT_JSON:
-    reise Exception("Secrets not found")
+    raise Exception("Secrets not found")
 
   SERVICE_ACCOUNT_INFO = json.loads(SERVICE_ACCOUNT_JSON)
 
