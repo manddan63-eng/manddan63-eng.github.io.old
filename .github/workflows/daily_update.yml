@@ -27,3 +27,11 @@ jobs:
           # 🔗 СВЯЗЬ СЕКРЕТОВ С КОДОМ
           SERVICE_ACCOUNT_INFO: ${{ secrets.SERVICE_ACCOUNT_INFO }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          
+      - name: Commit and Push to GitHub Pages
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+          git commit -m "Автообновление дашборда" || echo "Нет изменений"
+          git push
