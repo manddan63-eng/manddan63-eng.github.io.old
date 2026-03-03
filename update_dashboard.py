@@ -23,13 +23,19 @@ while True:
   # 1. НАСТРОЙКА ПОДКЛЮЧЕНИЯ
   # -------------------------------
   print("Настройка подключения к Google Sheets...")
-  SPREADSHEET_ID = "..."
+  SPREADSHEET_ID = os.environ.get('SPREADSHEET_ID')
 
   # СЕРВИСНЫЙ АККАУНТ - ВСТРОЕННЫЙ JSON
-  SERVICE_ACCOUNT_INFO = {...}
+  SERVICE_ACCOUNT_JSON = os.environ.get('SERVICE_ACCOUNT_INFO')
 
-  scope = ['https://spreadsheets.google.com/feeds ',
-  'https://www.googleapis.com/auth/drive ']
+
+  if not SPREADSHEET_ID or not SERVICE_ACCOUNT_JSON:
+    reise Exception("Secrets not found")
+
+  SERVICE_ACCOUNT_INFO = json.loads(SERVICE_ACCOUNT_JSON)
+
+  
+  scope = ['https://spreadsheets.google.com/feeds ','https://www.googleapis.com/auth/drive ']
   try:
       creds = ServiceAccountCredentials.from_json_keyfile_dict(SERVICE_ACCOUNT_INFO, scope)
       client = gspread.authorize(creds)
