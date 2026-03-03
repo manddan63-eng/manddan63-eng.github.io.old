@@ -1,0 +1,29 @@
+name: Daily Dashboard Update
+
+on:
+  schedule:
+    - cron: '*/30 7-21 * * *'  # Запуск каждый день в 07:00 UTC (10:00 МСК)
+  workflow_dispatch:      # Кнопка для ручного запуска
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install gspread oauth2client pandas numpy openpyxl
+      
+      - name: Run dashboard script
+        run: python update_dashboard.py
+        env:
+          # 🔗 СВЯЗЬ СЕКРЕТОВ С КОДОМ
+          SERVICE_ACCOUNT_INFO: ${{ secrets.SERVICE_ACCOUNT_INFO }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
