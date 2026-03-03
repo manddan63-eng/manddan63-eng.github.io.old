@@ -3,8 +3,8 @@
 # ПАРСИНГ ДАННЫХ - Часть 1 (ИСПРАВЛЕННАЯ И ДОПОЛНЕННАЯ ВЕРСИЯ)
 # ======================================================================
 # Установка необходимых библиотек
-!pip install -q gspread oauth2client pandas openpyxl
-!pip install -q --upgrade google-api-python-client
+#!pip install -q gspread oauth2client pandas openpyxl
+#!pip install -q --upgrade google-api-python-client
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
